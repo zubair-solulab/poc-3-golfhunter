@@ -1,4 +1,4 @@
-import { ArrowLeft } from 'lucide-react';
+import { ArrowLeft, User } from 'lucide-react';
 import { Button } from '@/components/ui/button';
 import { useLocation } from 'wouter';
 
@@ -33,7 +33,15 @@ export function Header({ title = 'ACE HUNTER', showBack = false, onBack }: Heade
             <ArrowLeft className="h-5 w-5" />
           </Button>
         )}
-        <h1 className="font-display text-xl font-bold text-primary">{title}</h1>
+        <h1 className="font-display text-xl font-bold text-primary flex-1">{title}</h1>
+        <Button
+          variant="ghost"
+          size="icon"
+          onClick={() => setLocation('/profile')}
+          data-testid="button-profile"
+        >
+          <User className="h-5 w-5" />
+        </Button>
       </div>
     </header>
   );

@@ -8,7 +8,9 @@ import SetupPage from "@/pages/SetupPage";
 import TierPage from "@/pages/TierPage";
 import WagerPage from "@/pages/WagerPage";
 import PaymentPage from "@/pages/PaymentPage";
+import TakeShotPage from "@/pages/TakeShotPage";
 import ResultPage from "@/pages/ResultPage";
+import ProfilePage from "@/pages/ProfilePage";
 import NotFound from "@/pages/not-found";
 
 function Router() {
@@ -19,7 +21,9 @@ function Router() {
       <Route path="/tier" component={TierPage} />
       <Route path="/wager" component={WagerPage} />
       <Route path="/payment" component={PaymentPage} />
+      <Route path="/take-shot" component={TakeShotPage} />
       <Route path="/result" component={ResultPage} />
+      <Route path="/profile" component={ProfilePage} />
       <Route component={NotFound} />
     </Switch>
   );

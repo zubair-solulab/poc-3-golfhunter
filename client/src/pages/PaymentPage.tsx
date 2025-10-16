@@ -10,11 +10,13 @@ import { SKILL_TIERS } from '@/lib/mock-data';
 import { Lock, CreditCard, Shield } from 'lucide-react';
 
 const steps = [
-  { id: 'course', label: 'Course' },
-  { id: 'tee', label: 'Tee Box' },
+  { id: 'setup', label: 'Setup' },
+  { id: 'position', label: 'Position' },
   { id: 'tier', label: 'Tier' },
   { id: 'wager', label: 'Wager' },
   { id: 'payment', label: 'Payment' },
+  { id: 'take-shot', label: 'Take Shot' },
+  { id: 'results', label: 'Results' }
 ];
 
 export default function PaymentPage() {
@@ -34,7 +36,7 @@ export default function PaymentPage() {
   const handlePayment = async () => {
     setProcessing(true);
     await new Promise(resolve => setTimeout(resolve, 2000));
-    setLocation(`/result?tier=${tier}&wager=${wager}&outcome=within-tier&distance=4.2`);
+    setLocation(`/take-shot?tier=${tier}&wager=${wager}`);
   };
 
   return (

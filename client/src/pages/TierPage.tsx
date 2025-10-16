@@ -9,11 +9,13 @@ import type { SkillTier } from '@/types/golf';
 import { Target, Award } from 'lucide-react';
 
 const steps = [
-  { id: 'course', label: 'Course' },
-  { id: 'tee', label: 'Tee Box' },
+  { id: 'setup', label: 'Setup' },
+  { id: 'position', label: 'Position' },
   { id: 'tier', label: 'Tier' },
   { id: 'wager', label: 'Wager' },
   { id: 'payment', label: 'Payment' },
+  { id: 'take-shot', label: 'Take Shot' },
+  { id: 'results', label: 'Results' }
 ];
 
 export default function TierPage() {

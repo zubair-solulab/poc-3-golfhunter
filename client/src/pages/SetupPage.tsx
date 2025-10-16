@@ -16,11 +16,13 @@ import { MOCK_COURSES, MOCK_HOLES, MOCK_TEE_BOXES } from '@/lib/mock-data';
 import { MapPin, Flag, Navigation } from 'lucide-react';
 
 const steps = [
-  { id: 'course', label: 'Course' },
-  { id: 'tee', label: 'Tee Box' },
+  { id: 'setup', label: 'Setup' },
+  { id: 'position', label: 'Position' },
   { id: 'tier', label: 'Tier' },
   { id: 'wager', label: 'Wager' },
   { id: 'payment', label: 'Payment' },
+  { id: 'take-shot', label: 'Take Shot' },
+  { id: 'results', label: 'Results' }
 ];
 
 export default function SetupPage() {
