@@ -24,8 +24,8 @@ client/
 ├── src/
 │   ├── components/
 │   │   ├── ui/          # Shadcn components
-│   │   ├── Header.tsx   # App header with navigation
-│   │   ├── ProgressStepper.tsx  # Multi-step flow indicator
+│   │   ├── Header.tsx   # App header with back/profile navigation
+│   │   ├── ProgressStepper.tsx  # 7-step flow indicator
 │   │   └── InstallPrompt.tsx    # PWA install prompt
 │   ├── pages/
 │   │   ├── HomePage.tsx      # Landing page with install prompt
@@ -33,7 +33,9 @@ client/
 │   │   ├── TierPage.tsx      # Skill tier selection
 │   │   ├── WagerPage.tsx     # Wager amount selection
 │   │   ├── PaymentPage.tsx   # Payment flow (mock)
-│   │   └── ResultPage.tsx    # Shot result display
+│   │   ├── TakeShotPage.tsx  # Camera activation & shot capture
+│   │   ├── ResultPage.tsx    # Shot result display
+│   │   └── ProfilePage.tsx   # User profile & stats
 │   ├── types/
 │   │   └── golf.ts      # TypeScript interfaces
 │   └── lib/
@@ -47,7 +49,9 @@ client/
 3. **Skill Tier** - Choose from 4 tiers (Sniper/Sharpshooter/Marksman/Novice)
 4. **Wager** - Select wager amount ($5-$100) with payout preview
 5. **Payment** - Secure payment form (mock Stripe integration)
-6. **Results** - Shot outcome, distance from cup, payout, and highlight video
+6. **Take Shot** - Camera activation with 3-second countdown and shot capture simulation
+7. **Results** - Shot outcome, distance from cup, payout, and highlight video
+8. **Profile** - User stats, achievements, XP progress, and recent shot history (accessible from header)
 
 ## Design System
 - **Primary Color**: Deep golf green (#1a4d2e) - trust and tradition
@@ -98,3 +102,8 @@ client/
 - Service worker registered on app load with auto-updates
 - No server folder or database - pure frontend implementation
 - Smooth 300ms page transitions with accessibility support
+- 7-step wagering flow: Setup → Position → Tier → Wager → Payment → Take Shot → Results
+- Profile page with user stats, XP system, achievements, and recent activity
+- Header includes profile button (User icon) for quick access to profile page
+- All interactive elements have data-testid attributes for testing
+- Camera activation page simulates 3-second countdown and shot capture
