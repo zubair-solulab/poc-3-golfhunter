@@ -4,7 +4,7 @@
 ACE HUNTER is a premium Progressive Web App (PWA) for golf skill wagering. Golfers can test their precision on Par 3 holes, place wagers based on their skill tier, and win instant payouts with AI-powered shot verification and highlight videos.
 
 ## Current Status
-**Frontend-Only Implementation** - All UI components and user flows are complete with mock data. No backend or database integration yet.
+**Frontend-Only Implementation** - All UI components and user flows are complete with mock data. No backend or database integration yet. **PWA-ready** with offline support, service worker caching, and install prompt.
 
 ## Tech Stack
 - **Frontend**: React 19 + Vite
@@ -12,17 +12,23 @@ ACE HUNTER is a premium Progressive Web App (PWA) for golf skill wagering. Golfe
 - **Routing**: Wouter
 - **UI Components**: Shadcn UI
 - **Fonts**: Outfit (display), Inter (body)
+- **PWA**: Service Worker for offline support, installable app
 
 ## Project Structure
 ```
 client/
+├── public/
+│   ├── sw.js            # Service worker for offline support
+│   ├── manifest.json    # PWA manifest
+│   └── icon.svg         # App icon
 ├── src/
 │   ├── components/
 │   │   ├── ui/          # Shadcn components
 │   │   ├── Header.tsx   # App header with navigation
-│   │   └── ProgressStepper.tsx  # Multi-step flow indicator
+│   │   ├── ProgressStepper.tsx  # Multi-step flow indicator
+│   │   └── InstallPrompt.tsx    # PWA install prompt
 │   ├── pages/
-│   │   ├── HomePage.tsx      # Landing page
+│   │   ├── HomePage.tsx      # Landing page with install prompt
 │   │   ├── SetupPage.tsx     # Course/Hole/TeeBox selection
 │   │   ├── TierPage.tsx      # Skill tier selection
 │   │   ├── WagerPage.tsx     # Wager amount selection
@@ -73,9 +79,22 @@ client/
 - Leaderboards and XP system
 - Social sharing capabilities
 
+## PWA Features (NEW!)
+- **Service Worker**: Caches app shell for offline access (cache version: ace-hunter-v1)
+- **Offline Support**: App works without internet after first visit
+- **Install Prompt**: Custom UI prompts users to install app to home screen
+- **Session Dismissal**: Install prompt respects user preference within session
+- **Standalone Mode**: Full-screen app experience when installed
+- **Cache Strategies**: 
+  - Cache-first for static assets (HTML, CSS, JS, images, fonts)
+  - Network-first with cache fallback for dynamic content
+  - Automatic cache cleanup on service worker updates
+
 ## Development Notes
 - Frontend uses latest React 19 with Vite build system
 - All components follow Shadcn design patterns
 - Responsive mobile-first design
-- PWA manifest included for app-like experience
+- Full PWA implementation with offline capability
+- Service worker registered on app load with auto-updates
 - No server folder or database - pure frontend implementation
+- Smooth 300ms page transitions with accessibility support
