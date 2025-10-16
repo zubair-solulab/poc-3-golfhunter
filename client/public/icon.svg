@@ -1,0 +1,20 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <!-- Golf green background -->
+  <rect width="512" height="512" fill="#1a4d2e"/>
+  
+  <!-- Gold circle (representing golf ball) -->
+  <circle cx="256" cy="200" r="80" fill="#f59e0b" opacity="0.95"/>
+  
+  <!-- Target rings -->
+  <circle cx="256" cy="200" r="80" fill="none" stroke="#fbbf24" stroke-width="3" opacity="0.8"/>
+  <circle cx="256" cy="200" r="60" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.6"/>
+  <circle cx="256" cy="200" r="40" fill="none" stroke="#fbbf24" stroke-width="2" opacity="0.4"/>
+  
+  <!-- Crosshair -->
+  <line x1="256" y1="160" x2="256" y2="240" stroke="#1a4d2e" stroke-width="3" opacity="0.6"/>
+  <line x1="216" y1="200" x2="296" y2="200" stroke="#1a4d2e" stroke-width="3" opacity="0.6"/>
+  
+  <!-- ACE HUNTER text -->
+  <text x="256" y="360" font-family="Outfit, sans-serif" font-size="48" font-weight="700" fill="#fbbf24" text-anchor="middle">ACE</text>
+  <text x="256" y="410" font-family="Outfit, sans-serif" font-size="32" font-weight="600" fill="rgba(255,255,255,0.9)" text-anchor="middle">HUNTER</text>
+</svg>
