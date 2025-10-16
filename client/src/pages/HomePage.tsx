@@ -7,7 +7,7 @@ export default function HomePage() {
   const [, setLocation] = useLocation();
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 page-enter">
       <div className="max-w-md mx-auto px-4 py-8">
         <div className="text-center mb-12 pt-8">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-4">

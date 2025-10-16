@@ -32,7 +32,7 @@ export default function TierPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background page-enter">
       <Header title="Select Skill Tier" showBack />
       <ProgressStepper currentStep={2} steps={steps} />
 

@@ -42,7 +42,7 @@ export default function SetupPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background page-enter">
       <Header title="Setup Challenge" showBack />
       <ProgressStepper currentStep={0} steps={steps} />
 

@@ -36,7 +36,7 @@ export default function ResultPage() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20">
+    <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 page-enter">
       <Header title="Shot Result" showBack={false} />
 
       <div className="max-w-md mx-auto px-4 py-8">

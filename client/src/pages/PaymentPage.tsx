@@ -38,7 +38,7 @@ export default function PaymentPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background page-enter">
       <Header title="Payment" showBack />
       <ProgressStepper currentStep={4} steps={steps} />
 

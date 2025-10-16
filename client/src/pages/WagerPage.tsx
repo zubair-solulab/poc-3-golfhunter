@@ -35,7 +35,7 @@ export default function WagerPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background page-enter">
       <Header title="Place Your Wager" showBack />
       <ProgressStepper currentStep={3} steps={steps} />
 
