@@ -1,0 +1,24 @@
+{
+  "name": "ACE HUNTER - Golf Skill Wagering",
+  "short_name": "ACE HUNTER",
+  "description": "Premium golf skill wagering. Test your precision, compete for payouts, and share epic highlight reels.",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#fafafa",
+  "theme_color": "#1a4d2e",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
