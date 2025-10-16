@@ -17,8 +17,10 @@ const steps = [
 ];
 
 export default function TakeShotPage() {
-  const [location, setLocation] = useLocation();
-  const searchParams = new URLSearchParams(location.split('?')[1]);
+  const [, setLocation] = useLocation();
+  const searchParams = new URLSearchParams(window.location.search);
+  const course = searchParams.get('course') || '';
+  const hole = searchParams.get('hole') || '';
   const tier = searchParams.get('tier') || '';
   const wager = searchParams.get('wager') || '';
   
@@ -44,12 +46,18 @@ export default function TakeShotPage() {
     } else {
       // Shot taken!
       setShotTaken(true);
+      
+      // Check if Augusta National (course ID "2") Hole 16 - always win with better distance
+      const isAugusta16 = course === '2' && hole === '2-16';
+      const outcome = isAugusta16 ? 'within-tier' : 'within-tier';
+      const distance = isAugusta16 ? '2.5' : '4.2';
+      
       // Simulate shot processing and redirect to results
       setTimeout(() => {
-        setLocation(`/result?tier=${tier}&wager=${wager}&outcome=within-tier&distance=4.2`);
+        setLocation(`/result?tier=${tier}&wager=${wager}&outcome=${outcome}&distance=${distance}`);
       }, 2000);
     }
-  }, [countdown, tier, wager, setLocation]);
+  }, [countdown, tier, wager, course, hole, setLocation]);
 
   return (
     <div className="min-h-screen bg-background page-enter">

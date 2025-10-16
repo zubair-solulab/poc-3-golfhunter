@@ -18,14 +18,14 @@ const steps = [
 ];
 
 export default function WagerPage() {
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
   const [selectedWager, setSelectedWager] = useState(0);
 
-  const params = new URLSearchParams(location.split('?')[1]);
-  const course = params.get('course');
-  const hole = params.get('hole');
-  const teeBox = params.get('teeBox');
-  const tier = params.get('tier');
+  const params = new URLSearchParams(window.location.search);
+  const course = params.get('course') || '';
+  const hole = params.get('hole') || '';
+  const teeBox = params.get('teeBox') || '';
+  const tier = params.get('tier') || '';
 
   const tierInfo = SKILL_TIERS.find(t => t.id === tier);
   const potential = selectedWager > 0 ? selectedWager * (tierInfo?.payout || 1) : 0;

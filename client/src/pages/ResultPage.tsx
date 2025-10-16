@@ -7,10 +7,10 @@ import { SKILL_TIERS } from '@/lib/mock-data';
 import { Trophy, Share2, Download, RotateCcw, TrendingUp, Video } from 'lucide-react';
 
 export default function ResultPage() {
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
 
-  const params = new URLSearchParams(location.split('?')[1]);
-  const tier = params.get('tier');
+  const params = new URLSearchParams(window.location.search);
+  const tier = params.get('tier') || '';
   const wager = parseInt(params.get('wager') || '0');
   const outcome = params.get('outcome') || 'missed';
   const distance = parseFloat(params.get('distance') || '0');

@@ -44,6 +44,26 @@ export const MOCK_TEE_BOXES: Record<string, TeeBox[]> = {
     { id: '1-17-blue', name: 'Blue Tees', color: 'blue', yardage: 188, holeId: '1-17' },
     { id: '1-17-red', name: 'Red Tees', color: 'red', yardage: 160, holeId: '1-17' },
   ],
+  '2-12': [
+    { id: '2-12-white', name: 'White Tees', color: 'white', yardage: 155, holeId: '2-12' },
+    { id: '2-12-blue', name: 'Blue Tees', color: 'blue', yardage: 165, holeId: '2-12' },
+    { id: '2-12-red', name: 'Red Tees', color: 'red', yardage: 140, holeId: '2-12' },
+  ],
+  '2-16': [
+    { id: '2-16-white', name: 'White Tees', color: 'white', yardage: 170, holeId: '2-16' },
+    { id: '2-16-blue', name: 'Blue Tees', color: 'blue', yardage: 180, holeId: '2-16' },
+    { id: '2-16-red', name: 'Red Tees', color: 'red', yardage: 155, holeId: '2-16' },
+  ],
+  '3-8': [
+    { id: '3-8-white', name: 'White Tees', color: 'white', yardage: 178, holeId: '3-8' },
+    { id: '3-8-blue', name: 'Blue Tees', color: 'blue', yardage: 188, holeId: '3-8' },
+    { id: '3-8-red', name: 'Red Tees', color: 'red', yardage: 165, holeId: '3-8' },
+  ],
+  '3-11': [
+    { id: '3-11-white', name: 'White Tees', color: 'white', yardage: 172, holeId: '3-11' },
+    { id: '3-11-blue', name: 'Blue Tees', color: 'blue', yardage: 182, holeId: '3-11' },
+    { id: '3-11-red', name: 'Red Tees', color: 'red', yardage: 160, holeId: '3-11' },
+  ],
 };
 
 export const SKILL_TIERS: SkillTierInfo[] = [

@@ -19,13 +19,13 @@ const steps = [
 ];
 
 export default function TierPage() {
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
   const [selectedTier, setSelectedTier] = useState<SkillTier | ''>('');
 
-  const params = new URLSearchParams(location.split('?')[1]);
-  const course = params.get('course');
-  const hole = params.get('hole');
-  const teeBox = params.get('teeBox');
+  const params = new URLSearchParams(window.location.search);
+  const course = params.get('course') || '';
+  const hole = params.get('hole') || '';
+  const teeBox = params.get('teeBox') || '';
 
   const handleNext = () => {
     if (selectedTier) {

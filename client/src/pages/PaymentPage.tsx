@@ -20,14 +20,14 @@ const steps = [
 ];
 
 export default function PaymentPage() {
-  const [location, setLocation] = useLocation();
+  const [, setLocation] = useLocation();
   const [processing, setProcessing] = useState(false);
 
-  const params = new URLSearchParams(location.split('?')[1]);
-  const course = params.get('course');
-  const hole = params.get('hole');
-  const teeBox = params.get('teeBox');
-  const tier = params.get('tier');
+  const params = new URLSearchParams(window.location.search);
+  const course = params.get('course') || '';
+  const hole = params.get('hole') || '';
+  const teeBox = params.get('teeBox') || '';
+  const tier = params.get('tier') || '';
   const wager = parseInt(params.get('wager') || '0');
 
   const tierInfo = SKILL_TIERS.find(t => t.id === tier);
@@ -36,7 +36,7 @@ export default function PaymentPage() {
   const handlePayment = async () => {
     setProcessing(true);
     await new Promise(resolve => setTimeout(resolve, 2000));
-    setLocation(`/take-shot?tier=${tier}&wager=${wager}`);
+    setLocation(`/take-shot?course=${course}&hole=${hole}&tier=${tier}&wager=${wager}`);
   };
 
   return (
