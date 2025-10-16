@@ -2,6 +2,7 @@ import { useLocation } from 'wouter';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Target, Trophy, Video, TrendingUp } from 'lucide-react';
+import InstallPrompt from '@/components/InstallPrompt';
 
 export default function HomePage() {
   const [, setLocation] = useLocation();
@@ -20,6 +21,8 @@ export default function HomePage() {
             Test your precision. Win real money.
           </p>
         </div>
+
+        <InstallPrompt />
 
         <Card className="p-8 mb-8 shadow-lg">
           <h2 className="font-display text-2xl font-semibold mb-4">
