@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Camera, Target, Timer } from 'lucide-react';
@@ -17,7 +17,7 @@ const steps = [
 ];
 
 export default function TakeShotPage() {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
   const searchParams = new URLSearchParams(window.location.search);
   const course = searchParams.get('course') || '';
   const hole = searchParams.get('hole') || '';
@@ -54,10 +54,10 @@ export default function TakeShotPage() {
       
       // Simulate shot processing and redirect to results
       setTimeout(() => {
-        setLocation(`/result?tier=${tier}&wager=${wager}&outcome=${outcome}&distance=${distance}`);
+        navigate(`/result?tier=${tier}&wager=${wager}&outcome=${outcome}&distance=${distance}`);
       }, 2000);
     }
-  }, [countdown, tier, wager, course, hole, setLocation]);
+  }, [countdown, tier, wager, course, hole, navigate]);
 
   return (
     <div className="min-h-screen bg-background page-enter">

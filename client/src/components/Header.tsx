@@ -1,6 +1,6 @@
-import { ArrowLeft, User } from 'lucide-react';
+import { ArrowLeft, CircleUserRound, Trophy, UserRound } from 'lucide-react';
 import { Button } from '@/components/ui/button';
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 
 interface HeaderProps {
   title?: string;
@@ -9,13 +9,13 @@ interface HeaderProps {
 }
 
 export function Header({ title = 'ACE HUNTER', showBack = false, onBack }: HeaderProps) {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
 
   const handleBack = () => {
     if (onBack) {
       onBack();
     } else {
-      setLocation('/');
+      navigate('/');
     }
   };
 
@@ -34,14 +34,26 @@ export function Header({ title = 'ACE HUNTER', showBack = false, onBack }: Heade
           </Button>
         )}
         <h1 className="font-display text-xl font-bold text-primary flex-1">{title}</h1>
-        <Button
-          variant="ghost"
-          size="icon"
-          onClick={() => setLocation('/profile')}
-          data-testid="button-profile"
-        >
-          <User className="h-5 w-5" />
-        </Button>
+
+        <div className="flex gap-1">
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate('/leaderboard')}
+            data-testid="button-header-leaderboard"
+          >
+            <Trophy className="h-5 w-5" />
+          </Button>
+          <Button
+            variant="ghost"
+            size="icon"
+            onClick={() => navigate('/profile')}
+            data-testid="button-profile"
+          >
+            <CircleUserRound className="h-5 w-5" />
+          </Button>
+        </div>
+
       </div>
     </header>
   );

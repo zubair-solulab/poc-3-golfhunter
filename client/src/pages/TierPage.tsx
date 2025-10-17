@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { ProgressStepper } from '@/components/ProgressStepper';
 import { Button } from '@/components/ui/button';
@@ -19,7 +19,7 @@ const steps = [
 ];
 
 export default function TierPage() {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
   const [selectedTier, setSelectedTier] = useState<SkillTier | ''>('');
 
   const params = new URLSearchParams(window.location.search);
@@ -29,7 +29,7 @@ export default function TierPage() {
 
   const handleNext = () => {
     if (selectedTier) {
-      setLocation(`/wager?course=${course}&hole=${hole}&teeBox=${teeBox}&tier=${selectedTier}`);
+      navigate(`/wager?course=${course}&hole=${hole}&teeBox=${teeBox}&tier=${selectedTier}`);
     }
   };
 

@@ -1,10 +1,10 @@
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 import { Card } from "@/components/ui/card";
 import { Button } from "@/components/ui/button";
 import { AlertCircle, Home } from "lucide-react";
 
 export default function NotFound() {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen w-full flex items-center justify-center bg-gradient-to-b from-background to-muted/20 px-4">
@@ -17,7 +17,7 @@ export default function NotFound() {
           The page you're looking for doesn't exist or has been moved.
         </p>
         <Button 
-          onClick={() => setLocation('/')}
+          onClick={() => navigate('/')}
           className="w-full h-12"
           data-testid="button-home"
         >

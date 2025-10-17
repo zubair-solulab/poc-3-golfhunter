@@ -56,3 +56,13 @@ export interface Session {
   wagerAmount: number;
   timestamp: Date;
 }
+
+export interface LeaderboardEntry {
+  rank: number;
+  playerName: string;
+  bestDistance: number;
+  totalWins: number;
+  totalXP: number;
+  tier: SkillTier;
+  avatarUrl?: string;
+}

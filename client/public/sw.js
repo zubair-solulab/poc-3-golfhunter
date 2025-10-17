@@ -7,8 +7,21 @@ const STATIC_ASSETS = [
   '/',
   '/index.html',
   '/manifest.json',
-  '/icon.svg'
+  '/icon.svg',
+  // Add critical CSS and JS files when they're built
+  '/src/main.tsx',
+  '/src/index.css'
 ];
+
+// Cache strategies for different types of requests
+const CACHE_STRATEGIES = {
+  // Cache first for static assets
+  STATIC: ['css', 'js', 'png', 'jpg', 'jpeg', 'gif', 'svg', 'woff', 'woff2'],
+  // Network first for API calls
+  API: ['/api/'],
+  // Stale while revalidate for HTML pages
+  HTML: ['html']
+};
 
 // Install event - cache static assets
 self.addEventListener('install', (event) => {
@@ -44,6 +57,73 @@ self.addEventListener('activate', (event) => {
   );
 });
 
+// Helper function to determine cache strategy
+function getCacheStrategy(request) {
+  const url = new URL(request.url);
+  
+  // API calls - network first
+  if (CACHE_STRATEGIES.API.some(path => url.pathname.startsWith(path))) {
+    return 'network-first';
+  }
+  
+  // Static assets - cache first
+  if (CACHE_STRATEGIES.STATIC.some(ext => url.pathname.endsWith(`.${ext}`))) {
+    return 'cache-first';
+  }
+  
+  // HTML pages - stale while revalidate
+  if (request.mode === 'navigate' || CACHE_STRATEGIES.HTML.some(ext => url.pathname.endsWith(`.${ext}`))) {
+    return 'stale-while-revalidate';
+  }
+  
+  return 'network-first';
+}
+
+// Cache first strategy
+async function cacheFirst(request) {
+  const cachedResponse = await caches.match(request);
+  if (cachedResponse) {
+    return cachedResponse;
+  }
+  
+  const networkResponse = await fetch(request);
+  if (networkResponse.status === 200) {
+    const cache = await caches.open(STATIC_CACHE);
+    cache.put(request, networkResponse.clone());
+  }
+  return networkResponse;
+}
+
+// Network first strategy
+async function networkFirst(request) {
+  try {
+    const networkResponse = await fetch(request);
+    if (networkResponse.status === 200) {
+      const cache = await caches.open(DYNAMIC_CACHE);
+      cache.put(request, networkResponse.clone());
+    }
+    return networkResponse;
+  } catch (error) {
+    const cachedResponse = await caches.match(request);
+    return cachedResponse || new Response('Offline', { status: 503 });
+  }
+}
+
+// Stale while revalidate strategy
+async function staleWhileRevalidate(request) {
+  const cachedResponse = await caches.match(request);
+  
+  const fetchPromise = fetch(request).then((networkResponse) => {
+    if (networkResponse.status === 200) {
+      const cache = caches.open(STATIC_CACHE);
+      cache.then(c => c.put(request, networkResponse.clone()));
+    }
+    return networkResponse;
+  }).catch(() => cachedResponse);
+  
+  return cachedResponse || fetchPromise;
+}
+
 // Fetch event - serve from cache, fallback to network
 self.addEventListener('fetch', (event) => {
   const { request } = event;
@@ -54,78 +134,26 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
-  // For navigation requests (HTML pages)
-  if (request.mode === 'navigate') {
-    event.respondWith(
-      caches.match(request).then((cachedResponse) => {
-        if (cachedResponse) {
-          // Return cached version and update cache in background
-          fetch(request).then((networkResponse) => {
-            if (networkResponse && networkResponse.status === 200) {
-              caches.open(STATIC_CACHE).then((cache) => {
-                cache.put(request, networkResponse.clone());
-              });
-            }
-          }).catch(() => {});
-          return cachedResponse;
-        }
-
-        // No cached version, fetch from network
-        return fetch(request).then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            caches.open(STATIC_CACHE).then((cache) => {
-              cache.put(request, networkResponse.clone());
-            });
-          }
-          return networkResponse;
-        }).catch(() => {
-          // Offline and no cache - return offline page or index
-          return caches.match('/');
-        });
-      })
-    );
+  // Skip non-GET requests
+  if (request.method !== 'GET') {
     return;
   }
 
-  // For static assets (CSS, JS, images, fonts)
-  if (
-    request.destination === 'style' ||
-    request.destination === 'script' ||
-    request.destination === 'image' ||
-    request.destination === 'font'
-  ) {
-    event.respondWith(
-      caches.match(request).then((cachedResponse) => {
-        if (cachedResponse) {
-          return cachedResponse;
-        }
-
-        return fetch(request).then((networkResponse) => {
-          if (networkResponse && networkResponse.status === 200) {
-            caches.open(STATIC_CACHE).then((cache) => {
-              cache.put(request, networkResponse.clone());
-            });
-          }
-          return networkResponse;
-        });
-      })
-    );
-    return;
+  const strategy = getCacheStrategy(request);
+  
+  switch (strategy) {
+    case 'cache-first':
+      event.respondWith(cacheFirst(request));
+      break;
+    case 'network-first':
+      event.respondWith(networkFirst(request));
+      break;
+    case 'stale-while-revalidate':
+      event.respondWith(staleWhileRevalidate(request));
+      break;
+    default:
+      event.respondWith(networkFirst(request));
   }
-
-  // For other requests, try network first, fallback to cache
-  event.respondWith(
-    fetch(request).then((networkResponse) => {
-      if (networkResponse && networkResponse.status === 200) {
-        caches.open(DYNAMIC_CACHE).then((cache) => {
-          cache.put(request, networkResponse.clone());
-        });
-      }
-      return networkResponse;
-    }).catch(() => {
-      return caches.match(request);
-    })
-  );
 });
 
 // Listen for messages from the client

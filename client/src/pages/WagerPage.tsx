@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { ProgressStepper } from '@/components/ProgressStepper';
 import { Button } from '@/components/ui/button';
@@ -18,7 +18,7 @@ const steps = [
 ];
 
 export default function WagerPage() {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
   const [selectedWager, setSelectedWager] = useState(0);
 
   const params = new URLSearchParams(window.location.search);
@@ -32,7 +32,7 @@ export default function WagerPage() {
 
   const handleNext = () => {
     if (selectedWager > 0) {
-      setLocation(`/payment?course=${course}&hole=${hole}&teeBox=${teeBox}&tier=${tier}&wager=${selectedWager}`);
+      navigate(`/payment?course=${course}&hole=${hole}&teeBox=${teeBox}&tier=${tier}&wager=${selectedWager}`);
     }
   };
 

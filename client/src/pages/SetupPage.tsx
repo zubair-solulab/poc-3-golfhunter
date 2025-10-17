@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { ProgressStepper } from '@/components/ProgressStepper';
 import { Button } from '@/components/ui/button';
@@ -26,7 +26,7 @@ const steps = [
 ];
 
 export default function SetupPage() {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
   const [selectedCourse, setSelectedCourse] = useState('');
   const [selectedHole, setSelectedHole] = useState('');
   const [selectedTeeBox, setSelectedTeeBox] = useState('');
@@ -39,7 +39,7 @@ export default function SetupPage() {
 
   const handleNext = () => {
     if (canProceed) {
-      setLocation(`/tier?course=${selectedCourse}&hole=${selectedHole}&teeBox=${selectedTeeBox}`);
+      navigate(`/tier?course=${selectedCourse}&hole=${selectedHole}&teeBox=${selectedTeeBox}`);
     }
   };
 

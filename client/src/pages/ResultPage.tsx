@@ -1,4 +1,4 @@
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
@@ -7,7 +7,7 @@ import { SKILL_TIERS } from '@/lib/mock-data';
 import { Trophy, Share2, Download, RotateCcw, TrendingUp, Video } from 'lucide-react';
 
 export default function ResultPage() {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
 
   const params = new URLSearchParams(window.location.search);
   const tier = params.get('tier') || '';
@@ -40,7 +40,7 @@ export default function ResultPage() {
       <Header title="Shot Result" showBack={false} />
 
       <div className="max-w-md mx-auto px-4 py-8">
-        <div className={`mb-8 p-8 rounded-2xl bg-gradient-to-br ${getOutcomeColor()} text-white text-center`}>
+        <div className={`mb-8 p-4 rounded-2xl bg-gradient-to-br ${getOutcomeColor()} text-white text-center`}>
           <div className="w-20 h-20 mx-auto mb-4 rounded-full bg-white/20 backdrop-blur-sm flex items-center justify-center">
             <Trophy className="w-10 h-10" />
           </div>
@@ -119,7 +119,7 @@ export default function ResultPage() {
         </div>
 
         <Button
-          onClick={() => setLocation('/setup')}
+          onClick={() => navigate('/setup')}
           className="w-full h-14 text-lg font-semibold"
           data-testid="button-play-again"
         >
@@ -129,8 +129,8 @@ export default function ResultPage() {
 
         <div className="mt-6 text-center">
           <Button
-            variant="ghost"
-            onClick={() => setLocation('/')}
+            variant="outline"
+            onClick={() => navigate('/')}
             data-testid="button-home"
           >
             Return to Home

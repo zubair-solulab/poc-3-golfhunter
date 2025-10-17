@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 import { Header } from '@/components/Header';
 import { ProgressStepper } from '@/components/ProgressStepper';
 import { Button } from '@/components/ui/button';
@@ -20,7 +20,7 @@ const steps = [
 ];
 
 export default function PaymentPage() {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
   const [processing, setProcessing] = useState(false);
 
   const params = new URLSearchParams(window.location.search);
@@ -36,7 +36,7 @@ export default function PaymentPage() {
   const handlePayment = async () => {
     setProcessing(true);
     await new Promise(resolve => setTimeout(resolve, 2000));
-    setLocation(`/take-shot?course=${course}&hole=${hole}&tier=${tier}&wager=${wager}`);
+    navigate(`/take-shot?course=${course}&hole=${hole}&tier=${tier}&wager=${wager}`);
   };
 
   return (

@@ -1,30 +1,28 @@
-import { useLocation } from 'wouter';
+import { useNavigate } from 'react-router-dom';
 import { Button } from '@/components/ui/button';
 import { Card } from '@/components/ui/card';
 import { Target, Trophy, Video, TrendingUp } from 'lucide-react';
 import InstallPrompt from '@/components/InstallPrompt';
 
 export default function HomePage() {
-  const [, setLocation] = useLocation();
+  const navigate = useNavigate();
 
   return (
     <div className="min-h-screen bg-gradient-to-b from-background to-muted/20 page-enter">
-      <div className="max-w-md mx-auto px-4 py-8">
-        <div className="text-center mb-12 pt-8">
+      <div className="max-w-md mx-auto px-4 py-4">
+        <div className="text-center mb-4 pt-2">
           <div className="inline-flex items-center justify-center w-20 h-20 rounded-full bg-primary/10 mb-4">
             <Target className="w-10 h-10 text-primary" />
           </div>
-          <h1 className="font-display text-5xl font-bold text-primary mb-3">
+          <h1 className="font-display text-5xl font-bold text-primary mb-2">
             ACE HUNTER
           </h1>
           <p className="text-lg text-muted-foreground">
             Test your precision. Win real money.
           </p>
         </div>
-
         <InstallPrompt />
-
-        <Card className="p-8 mb-8 shadow-lg">
+        <Card className="p-8 mb-6 shadow-lg">
           <h2 className="font-display text-2xl font-semibold mb-4">
             How It Works
           </h2>
@@ -75,16 +73,25 @@ export default function HomePage() {
             </div>
           </div>
         </Card>
+        <div className="flex gap-2">
+          <Button
+            onClick={() => navigate('/setup')}
+            className="w-full h-12 text-lg font-semibold shadow-lg"
+            data-testid="button-start"
+          >
+            Start Your Challenge
+          </Button>
 
-        <Button
-          onClick={() => setLocation('/setup')}
-          className="w-full h-14 text-lg font-semibold shadow-lg"
-          data-testid="button-start"
-        >
-          Start Your Challenge
-        </Button>
-
-        <div className="mt-8 text-center">
+          <Button
+            onClick={() => navigate('/leaderboard')}
+            variant="outline"
+            className="w-full h-12 text-lg font-semibold shadow-lg"
+            data-testid="button-leaderboard"
+          >
+            View Leaderboard
+          </Button>
+        </div>
+        <div className="mt-4 text-center">
           <p className="text-xs text-muted-foreground">
             Powered by AI precision tracking • Instant verification • Secure payouts
           </p>
